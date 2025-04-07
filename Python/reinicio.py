@@ -20,13 +20,12 @@ def verify_password(username, password):
 @app.route('/reiniciar', methods=['POST'])
 def reiniciar_servidor():
     try:
-        # Reiniciar Tomcat (suponiendo que Tomcat está como servicio)
-        # Cambia el nombre del servicio según tu configuración
-        subprocess.run(["net", "stop", "Tomcat9"], check=True)  # Detener Tomcat
-        subprocess.run(["net", "start", "Tomcat9"], check=True)  # Iniciar Tomcat
+        # Ejecutar como administrador
+        subprocess.run('runas /user:Administrador "net stop Tomcat9"', check=True, shell=True)
+        subprocess.run('runas /user:Administrador "net start Tomcat9"', check=True, shell=True)
 
         # Reiniciar el sistema Windows
-        subprocess.run(["shutdown", "/r", "/f", "/t", "0"], check=True)
+        subprocess.run('runas /user:Administrador "shutdown /r /f /t 0"', check=True, shell=True)
 
         return jsonify({"status": "servidores reiniciados correctamente"}), 200
 

@@ -1,4 +1,5 @@
 from flask import Flask, jsonify
+from flask_httpauth import HTTPBasicAuth
 import os
 import subprocess
 

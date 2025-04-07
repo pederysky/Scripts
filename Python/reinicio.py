@@ -5,6 +5,17 @@ import subprocess
 
 app = Flask(__name__)
 
+
+# Diccionario de usuarios (nombre de usuario, contraseña)
+users = {
+    "admin": "admin"
+}
+
+@auth.verify_password
+def verify_password(username, password):
+    if users.get(username) == password:
+        return username
+
 @app.route('/reiniciar', methods=['POST'])
 def reiniciar_servidor():
     try:

@@ -4,6 +4,7 @@ import os
 import subprocess
 
 app = Flask(__name__)
+auth = HTTPBasicAuth()
 
 
 # Diccionario de usuarios (nombre de usuario, contraseña)
